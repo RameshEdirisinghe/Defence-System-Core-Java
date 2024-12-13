@@ -31,7 +31,7 @@ The nearest allied unit is instantly notified for quick response.
     <em>*Ensure sound is enabled for the best experience.*</em> 🔊
 
 ### Screenshot 1: Main Interface
-![Main Interface](assets/screenshot1.png)
+![Main Interface](ScreenshotMain.png)
 
 ### Screenshot 2: Units in Action
 ![Units in Action](assets/screenshot2.png)
