@@ -33,8 +33,8 @@ The nearest allied unit is instantly notified for quick response.
 ### Screenshot 1: Main Interface
 ![Main Interface](ScreenshotMain.png)
 
-### Screenshot 2: Units in Action
-![Units in Action](assets/screenshot2.png)
+### Screenshot 2: Game Intro
+![Game Intro](ScreenshotIntro.png)
 
 ### Screenshot 3: Communication System
 ![Communication System](assets/screenshot3.png)
