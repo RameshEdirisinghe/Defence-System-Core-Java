@@ -37,7 +37,7 @@ The nearest allied unit is instantly notified for quick response.
 ![Game Intro](ScreenshotIntro.png)
 
 ### Screenshot 3: Communication System
-![Communication System](ScreenshotMainFunction.png)
+![Communication System](Screenshot.png)
 
 ## Contribution
 1. Fork the repository.
