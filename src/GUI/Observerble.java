@@ -16,10 +16,8 @@ import javaInterfaces.controllerObserverInterface;
 public class Observerble implements controllerObserverInterface {
 
     private controllerObserver[] con;
+    private String[][] msgar = new String[0][2];
     private int position;
-    private Helicopter heli;
-    private Tank warTank;
-    private Submarine sub;
     private boolean Data;
 
     Observerble() {
@@ -27,11 +25,7 @@ public class Observerble implements controllerObserverInterface {
 
     }
 
-    public void setVehicles(Helicopter heli, Tank warTank, Submarine sub) {
-        this.heli = heli;
-        this.warTank = warTank;
-        this.sub = sub;
-    }
+
 
     private void extendsObserverArray() {
         controllerObserver[] tempcon = new controllerObserver[con.length + 1];
@@ -46,15 +40,16 @@ public class Observerble implements controllerObserverInterface {
         con[con.length - 1] = vehicles;
     }
 
-    public void setSliderLevel(int position, String vehicleType) {
+    public void setSliderLevel(int position) {
         if (this.position != position) {
             this.position = position;
         }
-        notifyObjects(vehicleType);
+        notifyObjects();
+        
     }
 
     public void setData(boolean Data) {
-        
+
         if (this.Data != Data) {
             this.Data = Data;
         }
@@ -69,6 +64,37 @@ public class Observerble implements controllerObserverInterface {
 
     }
 
+    public void sendMsg(String msg, String Sender) {
+        extendsMsgArray();
+        msgar[msgar.length - 1][0] = msg;
+        msgar[msgar.length - 1][1] = Sender;
+        String msgArea = "";
+        for (int i = 0; i < msgar.length; i++) {
+
+            if (msgar[i][1].equals("Helicopter")) {
+                msgArea = msgArea + "\n" + msgar[i][1] + ":" + msgar[i][0];
+            } else if (msgar[i][1].equals("Tank")) {
+                msgArea = msgArea + "\n" + msgar[i][1] + ":" + msgar[i][0];
+            } else if (msgar[i][1].equals("Submarine")) {
+                msgArea += "\n" + msgar[i][1] + ":" + msgar[i][0];
+            } else {
+                System.out.println("wrong sender");
+            }
+            System.out.println(msgArea);
+
+        }
+        mainController.getInstance().sendMsgArea(msgArea);
+
+    }
+
+    private void extendsMsgArray() {
+        String[][] tempmsg = new String[msgar.length + 1][2];
+        for (int i = 0; i < msgar.length; i++) {
+            tempmsg[i] = msgar[i];
+        }
+        msgar = tempmsg;
+    }
+
     public void passData() {
 
         for (controllerObserver ob : con) {
@@ -78,14 +104,11 @@ public class Observerble implements controllerObserverInterface {
 
     }
 
-    public void notifyObjects(String vehicleType) {
+    public void notifyObjects() {
 
-        if (vehicleType.equals("Helicopter")) {
-            heli.update(position);
-        } else if (vehicleType.equals("Tank")) {
-            warTank.update(position);
-        } else if (vehicleType.equals("Submarine")) {
-            sub.update(position);
+        for (controllerObserver ob : con) {
+            
+            ob.update(position);
         }
 
     }
