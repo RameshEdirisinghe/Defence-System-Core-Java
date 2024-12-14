@@ -13,21 +13,26 @@ import javaInterfaces.controllerObserver;
  * @author ranga
  */
 public class Tank extends javax.swing.JFrame implements controllerObserver {
-    private mainController mainGui;
-  
-    public Tank( mainController mainGui ) {
-        this.mainGui=mainGui;
-        
+
+    private Observerble ob;
+
+    public Tank(Observerble ob) {
+        this.ob = ob;
+
         setVisible(true);
         initComponents();
         
+        int myage = 22;
+        
+        addsum(myage);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
+        System.out.println(screenWidth);
         int screenHeight = screenSize.height;
 
         int frameWidth = 602;
-        int frameHeight = 381+30;
-        setLocation(0,screenHeight - frameHeight);
+        int frameHeight = 381 + 30;
+        setLocation(0, screenHeight - frameHeight);
 
         jButton1.setEnabled(false);
         jButton5.setEnabled(false);
@@ -36,38 +41,47 @@ public class Tank extends javax.swing.JFrame implements controllerObserver {
     }
 
     public void update(int positionLevel) {
-        
-        if (positionLevel > 20 && positionLevel < 50) {
-            jButton1.setEnabled(true);
-            jButton5.setEnabled(false);
-            jButton3.setEnabled(false);
-        } else if (positionLevel > 50 && positionLevel < 60) {
-            jButton1.setEnabled(true);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(false);
-            jButton5.setEnabled(false);
-        } else if (positionLevel > 60 && positionLevel < 80) {
-            jButton1.setEnabled(true);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
-            jButton5.setEnabled(false);
 
-        } else if(positionLevel>80) {
-           jButton1.setEnabled(true);
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(true);
-            jButton5.setEnabled(true);
-        }else{
+        if (jCheckBox1.isSelected()) {
+            if (positionLevel > 20 && positionLevel < 50) {
+                jButton1.setEnabled(true);
+                jButton5.setEnabled(false);
+                jButton3.setEnabled(false);
+            } else if (positionLevel > 50 && positionLevel < 60) {
+                jButton1.setEnabled(true);
+                jButton2.setEnabled(true);
+                jButton3.setEnabled(false);
+                jButton5.setEnabled(false);
+            } else if (positionLevel > 60 && positionLevel < 80) {
+                jButton1.setEnabled(true);
+                jButton2.setEnabled(true);
+                jButton3.setEnabled(true);
+                jButton5.setEnabled(false);
+
+            } else if (positionLevel > 80) {
+                jButton1.setEnabled(true);
+                jButton2.setEnabled(true);
+                jButton3.setEnabled(true);
+                jButton5.setEnabled(true);
+            } else {
+                jButton1.setEnabled(false);
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(false);
+                jButton5.setEnabled(false);
+            }
+        } else {
             jButton1.setEnabled(false);
             jButton2.setEnabled(false);
             jButton3.setEnabled(false);
             jButton5.setEnabled(false);
         }
     }
-
+    public void addsum(int num){
+        ///////
+    }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
@@ -224,64 +238,63 @@ public class Tank extends javax.swing.JFrame implements controllerObserver {
         getContentPane().add(jButton2);
         jButton2.setBounds(160, 70, 148, 26);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/vecteezy_hud-animation-motion-templet-sci-fi_48672900-ezgif.com-video-to-gif-converter.gif"))); // NOI18N
+       
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 0, 610, 340);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     public void receivedMsg(String rMsg) {
         tankArea.setText(rMsg);
     }
 
     public void updateData(boolean data) {
-                
+
         if (data == true) {
             jLabel2.setText("Area Cleared");
         } else if (data == false) {
             jLabel2.setText("Area Not Cleared");
         }
     }
-    private void jButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jButton1StateChanged
+    private void jButton1StateChanged(javax.swing.event.ChangeEvent evt) {                                      
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jButton1StateChanged
+    }                                     
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }                                        
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }                                        
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         mainGui.sendMsg(jTextField1.getText(),"Tank");
-         jTextField1.setText("");
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        ob.sendMsg(jTextField1.getText(), "Tank");
+        jTextField1.setText("");
+    }                                        
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }                                          
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }                                        
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    }                                           
 
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -299,5 +312,5 @@ public class Tank extends javax.swing.JFrame implements controllerObserver {
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextArea tankArea;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
