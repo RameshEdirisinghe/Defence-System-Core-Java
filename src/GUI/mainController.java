@@ -14,22 +14,27 @@ public class mainController extends javax.swing.JFrame {
 
     private controllerObserverInterface observer;
     private String[][] msgar = new String[0][2];
+    public static mainController mainGui = new mainController();
 
+    private mainController() {
 
-    public mainController(controllerObserverInterface observer) {
-        
-        this.observer = observer;
-        
+        setVisible(true);
         initComponents();
         setResizable(false);
         setLocation(0, 0);
 
-
     }
 
+    public void setObservable(controllerObserverInterface observer) {
+        this.observer = observer;
+    }
+
+    public static mainController getInstance() {
+        return mainGui;
+    }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -173,80 +178,49 @@ public class mainController extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/vecteezy_hud-animation-motion-templet-sci-fi_48672900-ezgif.com-video-to-gif-converter.gif"))); // NOI18N
         jLabel5.setText("Main Controller");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(2, -4, 610, 340);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }                                          
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }                                          
 
-    public void sendMsg(String msg, String Sender) {
-        extendsMsgArray();
-        msgar[msgar.length - 1][0] = msg;
-        msgar[msgar.length - 1][1] = Sender;
-        String msgArea = "";
-        for (int i = 0; i < msgar.length; i++) {
-            
-            if (msgar[i][1].equals("Helicopter")) {
-                msgArea=msgArea+"\n"+msgar[i][1]+":"+msgar[i][0];
-            } else if (msgar[i][1].equals("Tank")) {
-                msgArea=msgArea+"\n"+msgar[i][1]+":"+msgar[i][0];
-            } else if (msgar[i][1].equals("Submarine")) {
-                msgArea+="\n"+msgar[i][1]+":"+msgar[i][0];
-            } else {
-                System.out.println("wrong sender");
-            }
-            System.out.println(msgArea);
-            
-
-        }
-        jTextArea4.setText(msgArea);
-
+    public void sendMsgArea(String msg) {
+        jTextArea4.setText(msg);
     }
 
-    private void extendsMsgArray() {
-        String[][] tempmsg = new String[msgar.length + 1][2];
-        for (int i = 0; i < msgar.length; i++) {
-            tempmsg[i] = msgar[i];
-        }
-        msgar = tempmsg;
-    }
-
-
-    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-     
-        String vehicleType = (String) jComboBox1.getSelectedItem();
-        observer.setSliderLevel(jSlider1.getValue(), vehicleType);
-    }//GEN-LAST:event_jSlider1StateChanged
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {                                      
        
+        observer.setSliderLevel(jSlider1.getValue());
+    }                                     
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
         boolean isSelected = jCheckBox1.isSelected();
-        
+
         observer.setData(isSelected);
 
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }                                          
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
         observer.msgAdminToAll(SendArea.getText());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }                                        
 
     /**
      * @param args the command line arguments
      */
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JTextArea SendArea;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -263,5 +237,5 @@ public class mainController extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTextArea jTextArea4;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
